@@ -17,4 +17,8 @@ public interface IUserRepository extends JpaRepository<User,Integer> {
     @Query("SELECT u FROM User u WHERE u.correoElectronico = ?1")
     ArrayList<User> existeCorreo(String correoElectronico);
 
+
+    @Query("SELECT u FROM User u WHERE u.correoElectronico = ?1")
+    User finByUserName(String correoElectronico);
+
 }

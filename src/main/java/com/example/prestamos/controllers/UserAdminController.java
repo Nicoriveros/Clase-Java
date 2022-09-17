@@ -5,7 +5,6 @@ import com.example.prestamos.entities.TipoDocumento;
 import com.example.prestamos.entities.User;
 import com.example.prestamos.services.Response;
 import com.example.prestamos.services.TipoDocumentoService;
-import com.example.prestamos.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +17,14 @@ import java.util.ArrayList;
 
 @Controller
 @RequestMapping("admin")
-public class UserAdminController {
+public class UserAdminController extends BaseController {
 
-    private UserService service;
+    //private UserService service;
     private TipoDocumentoService docService;
 
 
-    public UserAdminController(UserService service, TipoDocumentoService documentoService){
-        this.service = service;
+    public UserAdminController(TipoDocumentoService documentoService){
+        //this.service = service;
         this.docService = documentoService;
     }
 
@@ -34,6 +33,7 @@ public class UserAdminController {
     public String usuariosregistrados(Model usuarios){
         ArrayList<User> usersDB = this.service.selectAll();
         usuarios.addAttribute("usuarios",usersDB);
+        usuarios.addAttribute("usuarioautenticado",seguridad());
         return "/useradmin/usuariosregistrados";
     }
 

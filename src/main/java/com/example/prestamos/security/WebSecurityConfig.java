@@ -41,9 +41,9 @@ public class WebSecurityConfig implements UserDetailsService {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((requests) -> requests
-                        .antMatchers("/", "/home","/**/*.js", "/**/*.css","/registro","/postregistro").permitAll()
+                        .antMatchers("/", "/home","/**/*.js", "/**/*.css","/registro","/postregistro","/error").permitAll()
                         .anyRequest().authenticated()
-                ).oauth2Login().defaultSuccessUrl("/inicio",true)
+                ).oauth2Login().loginPage("/login").defaultSuccessUrl("/inicio",true)
                 .and()
                 .formLogin((form) -> form
                         .loginPage("/login")

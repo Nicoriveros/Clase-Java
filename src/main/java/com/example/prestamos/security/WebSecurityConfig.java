@@ -40,15 +40,15 @@ public class WebSecurityConfig implements UserDetailsService {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeHttpRequests((requests) -> requests
+                .authorizeHttpRequests()
                         .antMatchers("/", "/home","/**/*.js", "/**/*.css","/registro","/postregistro","/error").permitAll()
-                        .anyRequest().authenticated()
-                ).oauth2Login().loginPage("/login").defaultSuccessUrl("/inicio",true)
+                        .anyRequest().authenticated().and()
+                .oauth2Login().loginPage("/login").defaultSuccessUrl("/inicio",true)
                 .and()
-                .formLogin((form) -> form
+                .formLogin()
                         .loginPage("/login")
                         .permitAll().defaultSuccessUrl("/inicio",true)
-                )
+                .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .addLogoutHandler(logoutHandler);
 

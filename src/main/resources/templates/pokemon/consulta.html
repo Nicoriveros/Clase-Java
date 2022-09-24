@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{master}">
+
+<head></head>
+
+<body>
+<div layout:fragment="content">
+  <div class="container-fluid">
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+      <h1 class="h3 mb-0 text-gray-800">Listado de pokemon</h1>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <table class="table">
+          <thead>
+          <tr>
+            <th>Nombre del pokemon</th>
+            <th>Url</th>
+            <th>Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="poke : ${pokemons.results}">
+            <td th:text="${poke.name}"></td>
+            <td th:text="${poke.url}"></td>
+            <td><a th:href="@{/pokemon/detalle/{nombre}(nombre=${poke.name})}">Ver detalle</a></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+</body>
+
+</html>

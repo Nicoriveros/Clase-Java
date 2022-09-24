@@ -13,12 +13,15 @@ public class BaseController {
     @Autowired
     protected UserService service;
 
+
     protected User seguridad(){
+        User user;
+
         //ingreso a la información de spring security
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         //Tomo el correo electronico que nos guardo spring securiy
         String currentPrincipalName = authentication.getName();
-        User user = this.service.selectByUserName(currentPrincipalName);
+        user = this.service.selectByUserName(currentPrincipalName);
         return  user;
     }
 }
